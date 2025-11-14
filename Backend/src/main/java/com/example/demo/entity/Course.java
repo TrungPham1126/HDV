@@ -1,9 +1,6 @@
 package com.example.demo.entity;
 
-// Course.java
 import jakarta.persistence.*;
-import java.util.HashSet;
-import java.util.Objects;
 import java.util.Set;
 
 @Entity
@@ -12,93 +9,26 @@ public class Course {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long courseId;
+    private Long id;
 
     @Column(nullable = false)
-    private String title;
+    private String title; // Tên môn học (VD: Lập trình Java)
 
     @Lob
-    @Column(columnDefinition = "TEXT")
     private String description;
 
-    private String level; // "Beginner", "Intermediate"
+    // Một Course (môn học) có thể được mở thành nhiều Lớp học (Class)
+    @OneToMany(mappedBy = "course")
+    private Set<Class> classes;
 
+    // --- Giữ lại từ yêu cầu gốc ---
+    // Một Course sẽ có bộ video bài giảng chung
     @OneToMany(mappedBy = "course", cascade = CascadeType.ALL, orphanRemoval = true)
-    private Set<Lesson> lessons = new HashSet<>();
+    private Set<Video> videos;
 
-    // --- Constructor ---
-    public Course() {
-    }
+    // Một Course sẽ có bộ bài tập chung
+    @OneToMany(mappedBy = "course", cascade = CascadeType.ALL, orphanRemoval = true)
+    private Set<Exercise> exercises;
 
-    public Course(String title, String description, String level) {
-        this.title = title;
-        this.description = description;
-        this.level = level;
-    }
-
-    // --- Getters and Setters ---
-    public Long getCourseId() {
-        return courseId;
-    }
-
-    public void setCourseId(Long courseId) {
-        this.courseId = courseId;
-    }
-
-    public String getTitle() {
-        return title;
-    }
-
-    public void setTitle(String title) {
-        this.title = title;
-    }
-
-    public String getDescription() {
-        return description;
-    }
-
-    public void setDescription(String description) {
-        this.description = description;
-    }
-
-    public String getLevel() {
-        return level;
-    }
-
-    public void setLevel(String level) {
-        this.level = level;
-    }
-
-    public Set<Lesson> getLessons() {
-        return lessons;
-    }
-
-    public void setLessons(Set<Lesson> lessons) {
-        this.lessons = lessons;
-    }
-
-    // --- equals(), hashCode(), toString() ---
-    @Override
-    public boolean equals(Object o) {
-        if (this == o)
-            return true;
-        if (o == null || getClass() != o.getClass())
-            return false;
-        Course course = (Course) o;
-        return courseId != null && Objects.equals(courseId, course.courseId);
-    }
-
-    @Override
-    public int hashCode() {
-        return Objects.hash(courseId);
-    }
-
-    @Override
-    public String toString() {
-        return "Course{" +
-                "courseId=" + courseId +
-                ", title='" + title + '\'' +
-                ", level='" + level + '\'' +
-                '}';
-    }
+    // Getters, Setters...
 }

@@ -1,0 +1,12 @@
+{
+  "name": "english-platform",
+  "version": "1.0.0",
+  "description": "Giao diện mô phỏng hệ thống bán và luyện tập khóa học IELTS được triển khai theo kiến trúc dịch vụ (SOA). Phần front-end được viết thuần **HTML/CSS/JavaScript** và giả lập việc kết nối tới các dịch vụ Java ở back-end.",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC"
+}
