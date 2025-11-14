@@ -17,26 +17,82 @@ public class Class {
     private BigDecimal price;
     private Integer maxStudents;
 
-    // --- Quan hệ ---
-
-    // Nhiều Lớp học có thể thuộc MỘT Khóa học (Course)
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "course_id", nullable = false)
-    private Course course; // Thuộc môn học nào
+    private Course course;
 
-    // Nhiều Lớp học (có thể) được phụ trách bởi MỘT Giáo viên
-    // (Theo mô tả của bạn: "mỗi lớp do 1 giáo viên phụ trách")
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "teacher_id", nullable = false)
-    private Teacher teacher; // Giáo viên nào phụ trách
+    private User teacher;
 
-    // Một Lớp học có nhiều lượt đăng ký
     @OneToMany(mappedBy = "enrolledClass")
     private Set<Enrollment> enrollments;
 
-    // Một Lớp học có nhiều buổi học (lịch học)
     @OneToMany(mappedBy = "classEntry", cascade = CascadeType.ALL)
     private Set<Schedule> schedules;
 
-    // Getters, Setters...
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
+
+    public String getClassName() {
+        return className;
+    }
+
+    public void setClassName(String className) {
+        this.className = className;
+    }
+
+    public BigDecimal getPrice() {
+        return price;
+    }
+
+    public void setPrice(BigDecimal price) {
+        this.price = price;
+    }
+
+    public Integer getMaxStudents() {
+        return maxStudents;
+    }
+
+    public void setMaxStudents(Integer maxStudents) {
+        this.maxStudents = maxStudents;
+    }
+
+    public Course getCourse() {
+        return course;
+    }
+
+    public void setCourse(Course course) {
+        this.course = course;
+    }
+
+    public User getTeacher() {
+        return teacher;
+    }
+
+    public void setTeacher(User teacher) {
+        this.teacher = teacher;
+    }
+
+    public Set<Enrollment> getEnrollments() {
+        return enrollments;
+    }
+
+    public void setEnrollments(Set<Enrollment> enrollments) {
+        this.enrollments = enrollments;
+    }
+
+    public Set<Schedule> getSchedules() {
+        return schedules;
+    }
+
+    public void setSchedules(Set<Schedule> schedules) {
+        this.schedules = schedules;
+    }
+
 }

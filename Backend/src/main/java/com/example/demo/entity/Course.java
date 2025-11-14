@@ -12,23 +12,66 @@ public class Course {
     private Long id;
 
     @Column(nullable = false)
-    private String title; // Tên môn học (VD: Lập trình Java)
+    private String title;
 
     @Lob
     private String description;
 
-    // Một Course (môn học) có thể được mở thành nhiều Lớp học (Class)
     @OneToMany(mappedBy = "course")
     private Set<Class> classes;
 
-    // --- Giữ lại từ yêu cầu gốc ---
-    // Một Course sẽ có bộ video bài giảng chung
     @OneToMany(mappedBy = "course", cascade = CascadeType.ALL, orphanRemoval = true)
     private Set<Video> videos;
 
-    // Một Course sẽ có bộ bài tập chung
     @OneToMany(mappedBy = "course", cascade = CascadeType.ALL, orphanRemoval = true)
     private Set<Exercise> exercises;
 
-    // Getters, Setters...
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
+
+    public String getTitle() {
+        return title;
+    }
+
+    public void setTitle(String title) {
+        this.title = title;
+    }
+
+    public String getDescription() {
+        return description;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
+    }
+
+    public Set<Class> getClasses() {
+        return classes;
+    }
+
+    public void setClasses(Set<Class> classes) {
+        this.classes = classes;
+    }
+
+    public Set<Video> getVideos() {
+        return videos;
+    }
+
+    public void setVideos(Set<Video> videos) {
+        this.videos = videos;
+    }
+
+    public Set<Exercise> getExercises() {
+        return exercises;
+    }
+
+    public void setExercises(Set<Exercise> exercises) {
+        this.exercises = exercises;
+    }
+
 }

@@ -11,19 +11,65 @@ public class Schedule {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    // Nhiều lịch học thuộc MỘT Lớp học
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "class_id", nullable = false)
-    private Class classEntry; // Buổi học này của lớp nào
+    private Class classEntry;
 
     @Column(nullable = false)
-    private LocalDateTime startTime; // Giờ bắt đầu
+    private LocalDateTime startTime;
 
     @Column(nullable = false)
-    private LocalDateTime endTime; // Giờ kết thúc
+    private LocalDateTime endTime;
 
-    private String room; // Phòng học (nếu có)
-    private String topic; // Chủ đề buổi học (VD: "Bài 1: Giới thiệu")
+    private String room;
+    private String topic;
 
-    // Getters, Setters...
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
+
+    public Class getClassEntry() {
+        return classEntry;
+    }
+
+    public void setClassEntry(Class classEntry) {
+        this.classEntry = classEntry;
+    }
+
+    public LocalDateTime getStartTime() {
+        return startTime;
+    }
+
+    public void setStartTime(LocalDateTime startTime) {
+        this.startTime = startTime;
+    }
+
+    public LocalDateTime getEndTime() {
+        return endTime;
+    }
+
+    public void setEndTime(LocalDateTime endTime) {
+        this.endTime = endTime;
+    }
+
+    public String getRoom() {
+        return room;
+    }
+
+    public void setRoom(String room) {
+        this.room = room;
+    }
+
+    public String getTopic() {
+        return topic;
+    }
+
+    public void setTopic(String topic) {
+        this.topic = topic;
+    }
+
 }

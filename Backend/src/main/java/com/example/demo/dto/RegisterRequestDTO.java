@@ -1,11 +1,12 @@
 package com.example.demo.dto;
 
-public class StudentRequestDTO {
+public class RegisterRequestDTO {
     private String fullName;
     private String email;
     private String password;
     private String phoneNumber;
 
+    // Getters và Setters
     public String getFullName() {
         return fullName;
     }
@@ -37,5 +38,4 @@ public class StudentRequestDTO {
     public void setPhoneNumber(String phoneNumber) {
         this.phoneNumber = phoneNumber;
     }
-
 }
