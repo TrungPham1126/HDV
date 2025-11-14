@@ -1,0 +1,222 @@
+<!DOCTYPE html>
+<html lang="vi">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Anh Ngữ SOA Academy</title>
+    <link rel="stylesheet" href="css/styles.css" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:wght@400;500;600;700&display=swap"
+      rel="stylesheet"
+    />
+  </head>
+  <body>
+    <header class="site-header">
+      <div class="logo">Anh Ngữ <span>SOA</span> Academy</div>
+      <div class="search-box">
+        <input
+          type="text"
+          id="searchInput"
+          placeholder="Tìm khóa học, bài học..."
+          aria-label="Tìm kiếm"
+        />
+        <button id="searchBtn" aria-label="Tìm kiếm">🔍</button>
+      </div>
+      <nav>
+        <a href="#catalog" class="nav-link">Danh mục</a>
+        <button class="nav-link require-login" data-target="dashboard">Dashboard</button>
+        <button class="nav-link require-login" data-target="practice">Luyện tập</button>
+        <button class="nav-link require-teacher" data-target="teacher">Đăng bài học</button>
+      </nav>
+      <div class="header-actions">
+        <div class="cart" id="cart">
+          <span class="cart-icon">🛒</span>
+          <span class="cart-count" id="cartCount">0</span>
+          <div class="cart-preview" id="cartPreview" aria-live="polite"></div>
+        </div>
+        <button id="loginBtn" class="primary">Đăng nhập</button>
+      </div>
+    </header>
+
+    <main>
+      <section class="hero">
+        <div>
+          <h1>Khoá học IELTS theo chuẩn dịch vụ Java SOA</h1>
+          <p>
+            Tất cả tương tác (mua khóa, luyện tập, nhận phản hồi) được thực hiện thông
+            qua các dịch vụ Java phía máy chủ. Phiên bản front-end này mô phỏng toàn bộ
+            luồng làm việc để sinh viên làm quen.
+          </p>
+          <div class="hero-actions">
+            <a href="#catalog" class="primary">Khám phá khóa học</a>
+            <button class="secondary require-login" data-target="practice">
+              Bắt đầu luyện tập
+            </button>
+          </div>
+        </div>
+        <img src="https://images.unsplash.com/photo-1523580846011-d3a5bc25702b?auto=format&fit=crop&w=900&q=80" alt="English learning" />
+      </section>
+
+      <section id="catalog" class="panel">
+        <div class="panel-header">
+          <div>
+            <p class="eyebrow">Danh mục khóa học</p>
+            <h2>Thiết kế giống Udemy nhưng hướng tới IELTS chuyên sâu</h2>
+          </div>
+          <div class="filters">
+            <select id="levelFilter" aria-label="Lọc theo trình độ">
+              <option value="all">Tất cả trình độ</option>
+              <option value="starter">Mất gốc</option>
+              <option value="intermediate">6.0+</option>
+              <option value="advanced">7.5+</option>
+            </select>
+          </div>
+        </div>
+        <div id="courseList" class="grid"></div>
+      </section>
+
+      <section id="productDetail" class="panel hidden">
+        <div class="panel-header">
+          <p class="eyebrow">Thông tin khóa học</p>
+          <h2 id="detailTitle"></h2>
+        </div>
+        <div class="product-detail-body">
+          <div>
+            <p id="detailDescription"></p>
+            <ul id="detailHighlights"></ul>
+            <div class="detail-meta">
+              <span id="detailLevel"></span>
+              <span id="detailDuration"></span>
+            </div>
+          </div>
+          <div class="payment-card">
+            <p class="price" id="detailPrice"></p>
+            <button id="detailBuyBtn" class="primary">Thanh toán ngay</button>
+            <div class="qr-box">
+              <p>Quét mã QR MoMo để thanh toán</p>
+              <div class="qr-placeholder">QR MoMo</div>
+              <small>
+                Khi khách quét mã, front-end gọi tới dịch vụ thanh toán Java để xác nhận đơn
+                hàng và gửi mail hóa đơn tự động.
+              </small>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section id="dashboard" class="panel require-login-section">
+        <div class="panel-header">
+          <p class="eyebrow">Dashboard</p>
+          <h2>Khóa học của tôi</h2>
+        </div>
+        <div id="purchasedList" class="grid purchased"></div>
+        <div id="assignmentWorkspace" class="workspace hidden"></div>
+      </section>
+
+      <section id="practice" class="panel require-login-section">
+        <div class="panel-header">
+          <p class="eyebrow">Luyện tập</p>
+          <h2>Nhiệm vụ Speaking, Writing & Flashcard</h2>
+        </div>
+        <div class="practice-tabs">
+          <button data-tab="speaking" class="active">Speaking task</button>
+          <button data-tab="writing">Writing task</button>
+          <button data-tab="flashcard">Quiz vocab</button>
+        </div>
+        <div class="practice-content">
+          <div id="speaking" class="practice-panel">
+            <div class="form-group">
+              <label for="speakingPart">Chọn Part IELTS Speaking</label>
+              <select id="speakingPart"></select>
+            </div>
+            <div class="question-box" id="speakingQuestion"></div>
+            <div class="form-row">
+              <label>Gửi link hoặc file bài nói</label>
+              <input type="url" id="speakingLink" placeholder="https://..." />
+              <input type="file" id="speakingFile" accept="audio/*" />
+            </div>
+            <button id="speakingSubmit" class="primary">Gửi cho giáo viên</button>
+            <div id="speakingSubmissions" class="submission-list"></div>
+          </div>
+
+          <div id="writing" class="practice-panel hidden">
+            <div class="writing-tabs">
+              <button data-writing="task1" class="active">Task 1</button>
+              <button data-writing="task2">Task 2</button>
+            </div>
+            <div id="writingPrompt" class="question-box"></div>
+            <div class="form-row">
+              <label>Nhập link bài viết</label>
+              <input type="url" id="writingLink" placeholder="https://..." />
+              <input type="file" id="writingFile" accept="application/pdf,.doc,.docx" />
+            </div>
+            <button id="writingSubmit" class="primary">Nộp bài</button>
+            <div id="writingSubmissions" class="submission-list"></div>
+          </div>
+
+          <div id="flashcard" class="practice-panel hidden">
+            <div class="flashcard-grid" id="flashcardGrid"></div>
+            <p class="hint">Bấm vào từng thẻ để lật và ghi nhớ nghĩa.</p>
+          </div>
+        </div>
+      </section>
+
+      <section id="teacher" class="panel require-teacher-section">
+        <div class="panel-header">
+          <p class="eyebrow">Giáo viên</p>
+          <h2>Đăng bài & phản hồi</h2>
+        </div>
+        <div class="teacher-layout">
+          <div>
+            <h3>Gửi feedback cho học viên</h3>
+            <div class="form-group">
+              <label for="feedbackSubmission">Chọn bài đã nộp</label>
+              <select id="feedbackSubmission"></select>
+            </div>
+            <textarea id="feedbackContent" rows="4" placeholder="Nhập phản hồi chi tiết..."></textarea>
+            <button id="feedbackBtn" class="secondary">Gửi feedback</button>
+          </div>
+          <div>
+            <h3>Đăng bài luyện tập Reading & Listening</h3>
+            <label for="readingTask">Mô tả bài Reading</label>
+            <textarea id="readingTask" rows="3" placeholder="Dạng Heading Matching, số câu hỏi..."></textarea>
+            <label for="listeningAudio">Tải file Listening (.mp3)</label>
+            <input type="file" id="listeningAudio" accept="audio/mpeg" />
+            <button id="publishTask" class="primary">Đăng bài</button>
+            <div id="publishedTasks" class="teacher-tasks"></div>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <div id="loginModal" class="modal hidden" role="dialog" aria-modal="true" aria-labelledby="loginTitle">
+      <div class="modal-content">
+        <button class="close" id="closeLogin" aria-label="Đóng">×</button>
+        <h3 id="loginTitle">Đăng nhập</h3>
+        <p>Toàn bộ phiên đăng nhập sẽ gọi API Java (Google OAuth hoặc tài khoản giáo viên).</p>
+        <label for="email">Email</label>
+        <input type="email" id="email" placeholder="banhocvien@soa.edu" />
+        <label for="password">Mật khẩu</label>
+        <input type="password" id="password" placeholder="••••••" />
+        <div class="form-row-inline">
+          <label><input type="checkbox" id="teacherCheckbox" /> Tôi là giáo viên</label>
+          <a href="#">Quên mật khẩu?</a>
+        </div>
+        <button id="submitLogin" class="primary">Đăng nhập qua dịch vụ</button>
+      </div>
+    </div>
+
+    <footer>
+      <p>© 2024 Anh Ngữ SOA Academy · Tích hợp dịch vụ Java · Hotline 1900-1234</p>
+      <div class="footer-links">
+        <a href="#">Điều khoản</a>
+        <a href="#">Chính sách bảo mật</a>
+        <a href="#">Hỗ trợ</a>
+      </div>
+    </footer>
+
+    <script src="js/app.js" type="module"></script>
+  </body>
+</html>
