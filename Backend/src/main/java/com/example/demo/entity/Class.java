@@ -6,17 +6,16 @@ import java.util.Set;
 
 @Entity
 @Table(name = "classes")
-public class Class { // Lưu ý: 'Class' là từ khóa Java, dùng @Table đổi tên ok
+public class Class {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
     @Column(nullable = false)
-    private String className; // Tên lớp (VD: "Java K10 - Tối T2T4")
-
-    private BigDecimal price; // Học phí của lớp này
-    private Integer maxStudents; // Sĩ số tối đa
+    private String className;
+    private BigDecimal price;
+    private Integer maxStudents;
 
     // --- Quan hệ ---
 
