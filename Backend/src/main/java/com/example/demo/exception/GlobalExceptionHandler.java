@@ -8,6 +8,18 @@ import org.springframework.web.bind.annotation.RestControllerAdvice;
 
 @RestControllerAdvice
 public class GlobalExceptionHandler {
+    @ExceptionHandler(value = BadRequestException.class)
+    public ResponseEntity<RestResponse<Object>> handleBadRequestException(
+            BadRequestException ex) {
+
+        RestResponse<Object> res = new RestResponse<>();
+        res.setStatusCode(HttpStatus.BAD_REQUEST.value()); // 400
+        res.setError(ex.getMessage()); // Thông báo lỗi (VD: "Email đã tồn tại")
+        res.setMessage("BadRequestException");
+        res.setData(null);
+
+        return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(res);
+    }
 
     @ExceptionHandler(value = ResourceNotFoundException.class)
     public ResponseEntity<RestResponse<Object>> handleResourceNotFoundException(

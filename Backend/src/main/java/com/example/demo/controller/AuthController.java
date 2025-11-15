@@ -1,5 +1,7 @@
 package com.example.demo.controller;
 
+import com.example.demo.dto.LoginRequestDTO;
+import com.example.demo.dto.LoginResponseDTO;
 import com.example.demo.dto.RegisterRequestDTO;
 import com.example.demo.dto.UserResponseDTO;
 import com.example.demo.service.AuthService;
@@ -16,16 +18,31 @@ public class AuthController {
     private AuthService authService;
 
     @PostMapping("/register/student")
-    public ResponseEntity<?> registerStudent(@RequestBody RegisterRequestDTO registerRequest) {
-        try {
+    public ResponseEntity<UserResponseDTO> registerStudent(
+            @RequestBody RegisterRequestDTO registerRequest) {
 
-            UserResponseDTO response = authService.registerStudent(registerRequest);
+        UserResponseDTO response = authService.registerStudent(registerRequest);
 
-            return new ResponseEntity<>(response, HttpStatus.CREATED);
-        } catch (RuntimeException e) {
+        return new ResponseEntity<>(response, HttpStatus.CREATED);
 
-            return new ResponseEntity<>(e.getMessage(), HttpStatus.BAD_REQUEST);
-        }
     }
 
+    @PostMapping("/register/teacher")
+    public ResponseEntity<UserResponseDTO> registerTeacher(
+            @RequestBody RegisterRequestDTO registerRequest) {
+
+        UserResponseDTO response = authService.registerStudent(registerRequest);
+
+        return new ResponseEntity<>(response, HttpStatus.CREATED);
+
+    }
+
+    @PostMapping("/login")
+    public ResponseEntity<LoginResponseDTO> authenticateUser(
+            @RequestBody LoginRequestDTO loginRequest) {
+
+        LoginResponseDTO loginResponse = authService.loginUser(loginRequest);
+
+        return new ResponseEntity<>(loginResponse, HttpStatus.CREATED);
+    }
 }
