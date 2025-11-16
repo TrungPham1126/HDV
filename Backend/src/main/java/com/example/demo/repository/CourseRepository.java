@@ -8,6 +8,5 @@ import java.util.List;
 @Repository
 public interface CourseRepository extends JpaRepository<Course, Long> {
 
-    // Tìm các khóa học có tiêu đề chứa một chuỗi nào đó
     List<Course> findByTitleContaining(String title);
 }

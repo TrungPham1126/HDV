@@ -11,14 +11,10 @@ public class Payment {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-
-    // Nhiều thanh toán (có thể) đến từ MỘT Học viên
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "student_id", nullable = false)
     private User student;
 
-    // MỘT thanh toán gắn với MỘT lượt đăng ký (Enrollment)
-    // Giúp biết thanh toán này cho lớp nào
     @OneToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "enrollment_id", unique = true)
     private Enrollment enrollment;

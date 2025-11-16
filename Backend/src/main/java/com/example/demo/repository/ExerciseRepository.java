@@ -9,6 +9,5 @@ import java.util.List;
 @Repository
 public interface ExerciseRepository extends JpaRepository<Exercise, Long> {
 
-    // Lấy tất cả bài tập của một khóa học
     List<Exercise> findByCourse(Course course);
 }

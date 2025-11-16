@@ -12,9 +12,7 @@ import java.util.List;
 @Repository
 public interface PaymentRepository extends JpaRepository<Payment, Long> {
 
-    // Lấy tất cả thanh toán của một học viên
     List<Payment> findByStudent(User student);
 
-    // Lấy các thanh toán theo trạng thái (PENDING, SUCCESS, FAILED)
     List<Payment> findByStatus(PaymentStatus status);
 }

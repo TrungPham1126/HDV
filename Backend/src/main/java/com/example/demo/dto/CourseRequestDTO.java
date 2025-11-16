@@ -2,21 +2,10 @@ package com.example.demo.dto;
 
 import java.math.BigDecimal;
 
-// DTO dùng để trả về thông tin khóa học
-public class CourseResponseDTO {
-    private Long id;
+public class CourseRequestDTO {
     private String title;
     private String description;
     private BigDecimal price;
-    private String teacherName; // Tên giáo viên
-
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
-    }
 
     public String getTitle() {
         return title;
@@ -40,14 +29,6 @@ public class CourseResponseDTO {
 
     public void setPrice(BigDecimal price) {
         this.price = price;
-    }
-
-    public String getTeacherName() {
-        return teacherName;
-    }
-
-    public void setTeacherName(String teacherName) {
-        this.teacherName = teacherName;
     }
 
 }

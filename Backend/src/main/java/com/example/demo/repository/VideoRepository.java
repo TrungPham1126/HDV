@@ -9,6 +9,5 @@ import java.util.List;
 @Repository
 public interface VideoRepository extends JpaRepository<Video, Long> {
 
-    // Lấy tất cả video của một khóa học
     List<Video> findByCourse(Course course);
 }

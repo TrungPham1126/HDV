@@ -17,7 +17,7 @@ public class Enrollment {
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "class_id", nullable = false)
-    private Class enrolledClass;
+    private ClassT enrolledClass;
 
     @Column(nullable = false)
     private LocalDateTime enrolledAt;
@@ -46,11 +46,11 @@ public class Enrollment {
         this.student = student;
     }
 
-    public Class getEnrolledClass() {
+    public ClassT getEnrolledClass() {
         return enrolledClass;
     }
 
-    public void setEnrolledClass(Class enrolledClass) {
+    public void setEnrolledClass(ClassT enrolledClass) {
         this.enrolledClass = enrolledClass;
     }
 

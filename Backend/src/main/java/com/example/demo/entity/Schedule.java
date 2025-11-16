@@ -13,7 +13,7 @@ public class Schedule {
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "class_id", nullable = false)
-    private Class classEntry;
+    private ClassT classEntry;
 
     @Column(nullable = false)
     private LocalDateTime startTime;
@@ -32,11 +32,11 @@ public class Schedule {
         this.id = id;
     }
 
-    public Class getClassEntry() {
+    public ClassT getClassEntry() {
         return classEntry;
     }
 
-    public void setClassEntry(Class classEntry) {
+    public void setClassEntry(ClassT classEntry) {
         this.classEntry = classEntry;
     }
 

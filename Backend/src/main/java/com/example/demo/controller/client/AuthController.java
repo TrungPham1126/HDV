@@ -1,4 +1,4 @@
-package com.example.demo.controller;
+package com.example.demo.controller.client;
 
 import com.example.demo.dto.LoginRequestDTO;
 import com.example.demo.dto.LoginResponseDTO;

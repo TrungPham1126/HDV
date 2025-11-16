@@ -1,6 +1,8 @@
 package com.example.demo.entity;
 
 import jakarta.persistence.*;
+
+import java.math.BigDecimal;
 import java.util.Set;
 
 @Entity
@@ -18,7 +20,7 @@ public class Course {
     private String description;
 
     @OneToMany(mappedBy = "course")
-    private Set<Class> classes;
+    private Set<ClassT> classes;
 
     @OneToMany(mappedBy = "course", cascade = CascadeType.ALL, orphanRemoval = true)
     private Set<Video> videos;
@@ -50,11 +52,11 @@ public class Course {
         this.description = description;
     }
 
-    public Set<Class> getClasses() {
+    public Set<ClassT> getClasses() {
         return classes;
     }
 
-    public void setClasses(Set<Class> classes) {
+    public void setClasses(Set<ClassT> classes) {
         this.classes = classes;
     }
 

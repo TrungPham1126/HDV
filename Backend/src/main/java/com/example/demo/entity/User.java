@@ -35,7 +35,7 @@ public class User {
 
     // Một User (với vai trò Teacher) có thể dạy nhiều Lớp
     @OneToMany(mappedBy = "teacher")
-    private Set<Class> classesTaught;
+    private Set<ClassT> classesTaught;
 
     // Một User (với vai trò Student) có thể đăng ký nhiều Lớp
     @OneToMany(mappedBy = "student")
@@ -104,11 +104,11 @@ public class User {
         this.bio = bio;
     }
 
-    public Set<Class> getClassesTaught() {
+    public Set<ClassT> getClassesTaught() {
         return classesTaught;
     }
 
-    public void setClassesTaught(Set<Class> classesTaught) {
+    public void setClassesTaught(Set<ClassT> classesTaught) {
         this.classesTaught = classesTaught;
     }
 
