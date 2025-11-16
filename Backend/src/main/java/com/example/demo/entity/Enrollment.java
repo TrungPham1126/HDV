@@ -11,25 +11,27 @@ public class Enrollment {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
+    // Người mua (Student)
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "student_id", nullable = false)
     private User student;
 
+    // Khóa học được mua
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "class_id", nullable = false)
-    private ClassT enrolledClass;
+    @JoinColumn(name = "course_id", nullable = false)
+    private Course course; // <-- ĐÂY LÀ KHÓA CHÍNH
 
     @Column(nullable = false)
     private LocalDateTime enrolledAt;
 
-    @OneToOne(mappedBy = "enrollment", cascade = CascadeType.ALL)
-    private Payment payment;
+    // (Xóa liên kết với ClassT, chỉ giữ liên kết với Course)
 
     @PrePersist
     protected void onCreate() {
         enrolledAt = LocalDateTime.now();
     }
 
+    // Getters, Setters...
     public Long getId() {
         return id;
     }
@@ -46,12 +48,12 @@ public class Enrollment {
         this.student = student;
     }
 
-    public ClassT getEnrolledClass() {
-        return enrolledClass;
+    public Course getCourse() {
+        return course;
     }
 
-    public void setEnrolledClass(ClassT enrolledClass) {
-        this.enrolledClass = enrolledClass;
+    public void setCourse(Course course) {
+        this.course = course;
     }
 
     public LocalDateTime getEnrolledAt() {
@@ -61,13 +63,4 @@ public class Enrollment {
     public void setEnrolledAt(LocalDateTime enrolledAt) {
         this.enrolledAt = enrolledAt;
     }
-
-    public Payment getPayment() {
-        return payment;
-    }
-
-    public void setPayment(Payment payment) {
-        this.payment = payment;
-    }
-
 }

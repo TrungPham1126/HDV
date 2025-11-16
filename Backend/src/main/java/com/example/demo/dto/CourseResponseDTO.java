@@ -9,6 +9,7 @@ public class CourseResponseDTO {
     private String description;
     private BigDecimal price;
     private String teacherName; // Tên giáo viên
+    private Integer studentCount;
 
     public Long getId() {
         return id;
@@ -48,6 +49,14 @@ public class CourseResponseDTO {
 
     public void setTeacherName(String teacherName) {
         this.teacherName = teacherName;
+    }
+
+    public Integer getStudentCount() {
+        return studentCount;
+    }
+
+    public void setStudentCount(Integer studentCount) {
+        this.studentCount = studentCount;
     }
 
 }

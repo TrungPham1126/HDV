@@ -31,13 +31,6 @@ public class User {
     @JoinTable(name = "user_roles", joinColumns = @JoinColumn(name = "user_id"), inverseJoinColumns = @JoinColumn(name = "role_id"))
     private Set<Role> roles = new HashSet<>(); // Danh sách vai trò
 
-    // --- Cập nhật các mối quan hệ cũ (từ Student/Teacher) ---
-
-    // Một User (với vai trò Teacher) có thể dạy nhiều Lớp
-    @OneToMany(mappedBy = "teacher")
-    private Set<ClassT> classesTaught;
-
-    // Một User (với vai trò Student) có thể đăng ký nhiều Lớp
     @OneToMany(mappedBy = "student")
     private Set<Enrollment> enrollments;
 
@@ -102,14 +95,6 @@ public class User {
 
     public void setBio(String bio) {
         this.bio = bio;
-    }
-
-    public Set<ClassT> getClassesTaught() {
-        return classesTaught;
-    }
-
-    public void setClassesTaught(Set<ClassT> classesTaught) {
-        this.classesTaught = classesTaught;
     }
 
     public Set<Enrollment> getEnrollments() {

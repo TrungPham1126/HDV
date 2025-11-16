@@ -1,8 +1,7 @@
 package com.example.demo.entity;
 
 import jakarta.persistence.*;
-
-import java.math.BigDecimal;
+import java.math.BigDecimal; // Import
 import java.util.Set;
 
 @Entity
@@ -19,15 +18,33 @@ public class Course {
     @Lob
     private String description;
 
-    @OneToMany(mappedBy = "course")
-    private Set<ClassT> classes;
+    // --- THÊM CÁC TRƯỜNG NÀY ---
 
-    @OneToMany(mappedBy = "course", cascade = CascadeType.ALL, orphanRemoval = true)
+    @Column(nullable = false)
+    private BigDecimal price; // Giá của khóa học
+
+    // Nhiều Khóa học được tạo bởi MỘT User (Teacher)
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "teacher_id", nullable = false)
+    private User teacher; // Người tạo/dạy
+
+    // --- XÓA TRƯỜNG NÀY ---
+    // @OneToMany(mappedBy = "course")
+    // private Set<ClassT> classes; // <-- XÓA BỎ
+
+    // --- CÁC TRƯỜNG NỘI DUNG ---
+    @OneToMany(mappedBy = "course")
     private Set<Video> videos;
 
-    @OneToMany(mappedBy = "course", cascade = CascadeType.ALL, orphanRemoval = true)
+    @OneToMany(mappedBy = "course")
     private Set<Exercise> exercises;
 
+    // --- CÁC LƯỢT MUA ---
+    @OneToMany(mappedBy = "course")
+    private Set<Enrollment> enrollments;
+
+    // Getters và Setters...
+    // (Bao gồm đầy đủ cho price, teacher, videos, exercises...)
     public Long getId() {
         return id;
     }
@@ -52,28 +69,28 @@ public class Course {
         this.description = description;
     }
 
-    public Set<ClassT> getClasses() {
-        return classes;
+    public BigDecimal getPrice() {
+        return price;
     }
 
-    public void setClasses(Set<ClassT> classes) {
-        this.classes = classes;
+    public void setPrice(BigDecimal price) {
+        this.price = price;
     }
 
-    public Set<Video> getVideos() {
-        return videos;
+    public User getTeacher() {
+        return teacher;
     }
 
-    public void setVideos(Set<Video> videos) {
-        this.videos = videos;
+    public void setTeacher(User teacher) {
+        this.teacher = teacher;
     }
 
-    public Set<Exercise> getExercises() {
-        return exercises;
+    public Set<Enrollment> getEnrollments() {
+        return enrollments;
     }
 
-    public void setExercises(Set<Exercise> exercises) {
-        this.exercises = exercises;
+    public void setEnrollments(Set<Enrollment> enrollments) {
+        this.enrollments = enrollments;
     }
-
+    // ...
 }
